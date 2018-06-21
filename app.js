@@ -4,11 +4,13 @@ app = express();
 //app.set('port', 8080);
 
 // settings
-require('./lib/conf.js')(app,__dirname);
+require('./lib/conf.js')(app, __dirname).then(function () {
 
-app.listen(app.get('port'), function () {
+    app.listen(app.get('port'), function () {
 
-    console.log('express_todo is live.');
-    console.log('port: ' + app.get('port'));
+        console.log('express_todo is live.');
+        console.log('port: ' + app.get('port'));
+
+    });
 
 });
