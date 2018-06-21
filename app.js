@@ -10,7 +10,12 @@ require('./lib/conf.js')(app, __dirname).then(function () {
 
         console.log('express_todo is live.');
         console.log('port: ' + app.get('port'));
+        console.log('theme: ' + app.get('theme'));
 
     });
+
+}).catch (function(e) {
+
+    console.log(e.message);
 
 });
