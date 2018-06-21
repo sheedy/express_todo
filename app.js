@@ -1,7 +1,10 @@
 let express = require('express'),
 app = express();
 
-app.set('port', 8080);
+//app.set('port', 8080);
+
+// settings
+require('./lib/conf.js')(app,__dirname);
 
 app.listen(app.get('port'), function () {
 
