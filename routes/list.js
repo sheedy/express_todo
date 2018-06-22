@@ -1,6 +1,10 @@
 let express = require('express'),
 path = require('path'),
-listApp = module.exports = express();
+fs = require('fs-extra'),
+FileSync = require('lowdb/adapters/FileSync'),
+low = require('lowdb');
+
+let listApp = express();
 
 listApp.get('/list', function (req, res) {
 
@@ -16,7 +20,7 @@ listApp.post('/list',
     [
 
         // check body
-        function () {
+        function (req, res, next) {
 
             // body must be there,
             if (req.body) {
@@ -60,7 +64,8 @@ listApp.post('/list',
 
                 res.json({
                     success: true,
-                    mess: 'create a new list'
+                    mess: 'create a new list',
+                    root: listApp.get('root')
                 });
 
             } else {
@@ -85,3 +90,24 @@ listApp.post('/list',
         }
 
     ]);
+
+// export a list app
+module.exports = function (obj) {
+
+    listApp.set('dir_root', obj.dir_root || process.cwd());
+    listApp.set('path_lists', path.join(listApp.get('dir_root'), 'db', 'lists.json'));
+
+    // ensure db folder
+    fs.ensureDir(path.join(listApp.get('dir_root'), 'db')).then(function () {
+
+        var list = listApp.locals.list = low(new FileSync(listApp.get('path_lists')));
+
+        list.defaults({
+            lists: []
+        }).write();
+
+    });
+
+    return listApp;
+
+};
