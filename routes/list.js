@@ -9,3 +9,17 @@ listApp.get('/list', function (req, res) {
     });
 
 });
+
+listApp.use(require('body-parser').json());
+listApp.post('/list', function (req, res) {
+
+    console.log(req.body);
+
+    res.json({
+
+        mess: 'hello',
+        body: req.body
+
+    });
+
+});

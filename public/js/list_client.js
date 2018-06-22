@@ -22,10 +22,8 @@ var lc = (function () {
         var xhr = this.xhr = new XMLHttpRequest();
         xhr.open(this.method, this.path);
 
-        // with this client all GET request should be for JSON
-        if (this.method.toUpperCase() === 'GET') {
-            xhr.setRequestHeader('Content-Type', 'application/json');
-        }
+        // with this client all GET,and POST request should be for JSON
+        xhr.setRequestHeader('Content-Type', 'application/json');
 
         var req = this;
         xhr.onreadystatechange = function () {
@@ -69,6 +67,25 @@ var lc = (function () {
 
             new http({
 
+                onDone: done,
+                onFail: fail
+
+            });
+
+        },
+
+        // creates a new list
+        createList: function (done,fail) {
+
+            done = done || nocb;
+            fail = fail || nocb;
+
+            new http({
+
+                method: 'POST',
+                payload: JSON.stringify({
+                    mess: 'new list'
+                }),
                 onDone: done,
                 onFail: fail
 
