@@ -5,8 +5,11 @@ app = express();
 // use lib/conf.js to load app settings from conf.yaml
 require('./lib/conf.js')(app, __dirname).then(function () {
 
-    // static paths
-	app.use('/js',express.static( path.join(__dirname,'themes',app.get('theme'),'js') ));
+    // static paths for all themes
+    app.use('/js', express.static('public/js'));
+
+    // static paths for current theme
+    app.use('/theme/js',express.static( path.join(__dirname,'themes',app.get('theme'),'js') ));
 
     // main render
     app.get('/', function (req, res) {
@@ -15,6 +18,7 @@ require('./lib/conf.js')(app, __dirname).then(function () {
 
     });
 
+    // start listening
     app.listen(app.get('port'), function () {
 
         console.log('express_todo is live.');
