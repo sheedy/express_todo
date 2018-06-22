@@ -75,7 +75,7 @@ var lc = (function () {
         },
 
         // creates a new list
-        createList: function (done,fail) {
+        createList: function (done, fail) {
 
             done = done || nocb;
             fail = fail || nocb;
@@ -84,7 +84,8 @@ var lc = (function () {
 
                 method: 'POST',
                 payload: JSON.stringify({
-                    mess: 'new list'
+                    mode: 'create',
+                    listname: 'foo'
                 }),
                 onDone: done,
                 onFail: fail

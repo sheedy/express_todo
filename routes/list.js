@@ -10,16 +10,78 @@ listApp.get('/list', function (req, res) {
 
 });
 
+// respond to posts
 listApp.use(require('body-parser').json());
-listApp.post('/list', function (req, res) {
+listApp.post('/list',
+    [
 
-    console.log(req.body);
+        // check body
+        function () {
 
-    res.json({
+            // body must be there,
+            if (req.body) {
 
-        mess: 'hello',
-        body: req.body
+                //  and the body must have a mode property
+                if (req.body.mode) {
 
-    });
+                    // then we are good to continue
+                    next();
 
-});
+                } else {
+
+                    // respond with no mode mess
+                    res.json({
+
+                        success: false,
+                        mess: 'no mode.'
+
+                    });
+
+                }
+
+            } else {
+
+                // respond with no body mess
+                res.json({
+
+                    success: false,
+                    mess: 'no body was parsed.'
+
+                });
+
+            }
+
+        },
+
+        // create a list?
+        function (req, res, next) {
+
+            if (req.body.mode === 'create') {
+
+                res.json({
+                    success: true,
+                    mess: 'create a new list'
+                });
+
+            } else {
+
+                next();
+
+            }
+
+        },
+
+        // fail
+        function (req, res) {
+
+            res.json({
+
+                success: false,
+                mess: 'post recived, but nothing was done. Check the given body',
+                body: req.body
+
+            });
+
+        }
+
+    ]);
