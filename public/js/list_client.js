@@ -21,6 +21,7 @@ var lc = (function () {
         // start the request
         var xhr = this.xhr = new XMLHttpRequest();
         xhr.open(this.method, this.path);
+
         // with this client all GET request should be for JSON
         if (this.method.toUpperCase() === 'GET') {
             xhr.setRequestHeader('Content-Type', 'application/json');
@@ -31,6 +32,7 @@ var lc = (function () {
 
         };
 
+        // send
         xhr.send(this.payload);
 
     };

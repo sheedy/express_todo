@@ -9,7 +9,10 @@ require('./lib/conf.js')(app, __dirname).then(function () {
     app.use('/js', express.static('public/js'));
 
     // static paths for current theme
-    app.use('/theme/js',express.static( path.join(__dirname,'themes',app.get('theme'),'js') ));
+    app.use('/theme/js', express.static(path.join(__dirname, 'themes', app.get('theme'), 'js')));
+
+    // use /list path
+    app.use(require('./routes/list'));
 
     // main render
     app.get('/', function (req, res) {
