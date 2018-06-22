@@ -11,10 +11,10 @@ var lc = (function () {
         this.method = obj.method || 'GET';
         this.path = obj.path || '/list';
         this.payload = obj.payload || null;
-        this.onDone = obj.OnDone || function () {
+        this.onDone = obj.onDone || function () {
             console.log(this.response);
         };
-        this.onFail = obj.OnFail || function () {
+        this.onFail = obj.onFail || function () {
             console.log(this.response);
         };
 
@@ -26,9 +26,23 @@ var lc = (function () {
         if (this.method.toUpperCase() === 'GET') {
             xhr.setRequestHeader('Content-Type', 'application/json');
         }
+
+        var req = this;
         xhr.onreadystatechange = function () {
 
-            console.log(this);
+            if (this.readyState === 4) {
+
+                if (this.status === 200) {
+
+                    req.onDone.call(this, this);
+
+                } else {
+
+                    req.onFail.call(this, this);
+
+                }
+
+            }
 
         };
 
@@ -37,7 +51,32 @@ var lc = (function () {
 
     };
 
-    var req = new http();
+    // no call back default
+    var nocb = function () {
+
+        console.log(this.response);
+
+    };
+
+    // public api
+    return {
+
+        // just get the main index
+        getIndex: function (done, fail) {
+
+            done = done || nocb;
+            fail = fail || nocb;
+
+            new http({
+
+                onDone: done,
+                onFail: fail
+
+            });
+
+        }
+
+    };
 
 }
     ());
