@@ -6,6 +6,35 @@ low = require('lowdb');
 
 let listApp = express();
 
+// ensure db folder, and default list.json
+let ensureDB = function () {
+
+    return fs.ensureDir(path.join(listApp.get('dir_root'), 'db')).then(function () {
+
+        var list = listApp.locals.list = low(new FileSync(listApp.get('path_lists')));
+
+        list.defaults({
+            lists: []
+        }).write();
+
+    });
+
+};
+
+// push new list
+let pushList = function () {
+
+    let list = listApp.locals.list;
+
+    list.get('lists').push({
+
+        name: 'new list',
+        items: []
+
+    }).write();
+
+};
+
 listApp.get('/list', function (req, res) {
 
     res.json({
@@ -62,6 +91,8 @@ listApp.post('/list',
 
             if (req.body.mode === 'create') {
 
+                pushList();
+
                 res.json({
                     success: true,
                     mess: 'create a new list',
@@ -98,15 +129,7 @@ module.exports = function (obj) {
     listApp.set('path_lists', path.join(listApp.get('dir_root'), 'db', 'lists.json'));
 
     // ensure db folder
-    fs.ensureDir(path.join(listApp.get('dir_root'), 'db')).then(function () {
-
-        var list = listApp.locals.list = low(new FileSync(listApp.get('path_lists')));
-
-        list.defaults({
-            lists: []
-        }).write();
-
-    });
+    ensureDB();
 
     return listApp;
 
