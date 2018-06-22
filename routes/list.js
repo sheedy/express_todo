@@ -1,7 +1,8 @@
 let express = require('express'),
 path = require('path'),
 fs = require('fs-extra'),
-FileSync = require('lowdb/adapters/FileSync'),
+//FileSync = require('lowdb/adapters/FileSync'),
+FileAsync = require('lowdb/adapters/FileAsync'),
 low = require('lowdb');
 
 let listApp = express();
@@ -11,27 +12,58 @@ let ensureDB = function () {
 
     return fs.ensureDir(path.join(listApp.get('dir_root'), 'db')).then(function () {
 
+        /*
         var list = listApp.locals.list = low(new FileSync(listApp.get('path_lists')));
 
         list.defaults({
-            lists: []
+        lists: []
         }).write();
+         */
+
+        let adapter = new FileAsync(listApp.get('path_lists'));
+
+        return low(adapter).then(function (list) {
+
+            return list.defaults({
+                lists: []
+            }).write();
+
+        })
 
     });
 
 };
 
 // push new list
-let pushList = function () {
+let pushList = function (meta) {
 
     let list = listApp.locals.list;
 
+    meta = meta || {
+        name: 'new list'
+    };
+
+    /*
     list.get('lists').push({
 
-        name: 'new list',
-        items: []
+    name: 'new list',
+    items: []
 
     }).write();
+     */
+
+    let adapter = new FileAsync(listApp.get('path_lists'));
+
+    return low(adapter).then(function (list) {
+
+        return list.get('lists').push({
+
+            name: 'new list',
+            items: []
+
+        }).write();
+
+    });
 
 };
 
@@ -95,8 +127,7 @@ listApp.post('/list',
 
                 res.json({
                     success: true,
-                    mess: 'create a new list',
-                    root: listApp.get('root')
+                    mess: 'create a new list'
                 });
 
             } else {
