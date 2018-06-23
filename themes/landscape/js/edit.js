@@ -38,11 +38,19 @@ if (get('listid')) {
 
                     var res = JSON.parse(this.response);
 
-                    var li = document.createElement('li');
+                    if (res.success) {
 
-                    li.innerHTML = res.body.item.name;
+                        var li = document.createElement('li');
 
-                    get('list_current').appendChild(li);
+                        li.innerHTML = res.body.item.name;
+
+                        get('list_current').appendChild(li);
+
+                    } else {
+
+                        console.log(this.response);
+
+                    }
 
                 }
 
