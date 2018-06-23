@@ -30,15 +30,15 @@ let pushList = function (meta) {
 
     let listAdapter = new FileAsync(listApp.get('path_lists'));
 
-    meta = meta || {
-        name: 'new list'
-    };
+    meta = meta || {};
+
+    meta.name = meta.name || 'new list';
 
     return low(listAdapter).then(function (list) {
 
         return list.get('lists').push({
 
-            name: 'new list',
+            name: meta.name,
             items: []
 
         }).write();
