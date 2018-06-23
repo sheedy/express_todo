@@ -4,6 +4,7 @@ dbLists = require('../lib/db_lists'),
 
 editApp = express();
 
+// GET
 editApp.get('/edit', function (req, res) {
 
     if (req.query.l === undefined) {
@@ -34,12 +35,31 @@ editApp.get('/edit', function (req, res) {
                 layout: 'edit',
                 listId: req.query.l || null,
                 lists: [],
-				list : list
+                list: list
             });
 
         });
 
     }
+
+});
+
+// POST
+editApp.use(require('body-parser').json());
+editApp.post('/edit',
+
+    // check body
+    require('../lib/check_body.js'),
+
+    function (req, res) {
+
+    res.json({
+
+        success: true,
+        mess: 'post recived, but nothing happended',
+        body: res.body
+
+    })
 
 });
 
