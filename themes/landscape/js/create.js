@@ -6,9 +6,7 @@ get('create_submit').addEventListener('click', function (e) {
     var nodes = get('create').querySelectorAll('.meta'),
 
     // set up a new body to send
-    body = {
-        mode: 'create'
-    };
+    body = {};
 
     // forEach 'meta' input
     [].forEach.call(nodes, function (el) {

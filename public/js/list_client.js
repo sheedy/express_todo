@@ -105,6 +105,32 @@ var lc = (function () {
 
             obj.onDone = obj.onDone || nocb;
             obj.onFail = obj.onFail || nocb;
+
+            obj.body.mode = 'create';
+            obj.body = JSON.stringify(obj.body);
+
+            new http({
+
+                method: 'POST',
+                body: obj.body,
+                onDone: obj.onDone,
+                onFail: obj.onFail
+
+            });
+
+        },
+
+        // creates a new list
+        addListItem: function (obj) {
+
+            obj = obj || {};
+
+            obj.onDone = obj.onDone || nocb;
+            obj.onFail = obj.onFail || nocb;
+
+            obj.body = obj.body || {};
+            obj.body.mode = 'add_list_item';
+            obj.body.item = obj.body.item || {name:'Pick nose, want watch youtube.'};
             obj.body = JSON.stringify(obj.body);
 
             new http({

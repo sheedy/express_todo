@@ -1,7 +1,8 @@
 
 // use list clients createList Method to send the body
 
-if (get('listId')) {
+/*
+if (get('listid')) {
 
     lc.getList({
 
@@ -16,3 +17,4 @@ if (get('listId')) {
     });
 
 }
+*/
