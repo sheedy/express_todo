@@ -2,7 +2,8 @@ let express = require('express'),
 path = require('path'),
 fs = require('fs-extra'),
 FileAsync = require('lowdb/adapters/FileAsync'),
-low = require('lowdb');
+low = require('lowdb'),
+shortId = require('shortid');
 
 let listApp = express();
 
@@ -39,6 +40,7 @@ let pushList = function (meta) {
         return list.get('lists').push({
 
             name: meta.name,
+            id: shortId.generate(),
             items: []
 
         }).write();
@@ -80,7 +82,7 @@ listApp.post('/list',
 
                         success: false,
                         mess: 'no mode.',
-						body: req.body
+                        body: req.body
 
                     });
 
