@@ -25,6 +25,14 @@ require('./lib/conf.js')(app, __dirname).then(function () {
 
     });
 
+    app.get('/create', function (req, res) {
+
+        res.render('index', {
+            layout: 'create'
+        });
+
+    });
+
     // start listening
     app.listen(app.get('port'), function () {
 
