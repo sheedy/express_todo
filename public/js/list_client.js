@@ -59,6 +59,9 @@ var lc = (function () {
     // public api
     return {
 
+        // expose http
+        http: http,
+
         // just get the main index
         getIndex: function (obj) {
 

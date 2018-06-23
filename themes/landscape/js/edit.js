@@ -2,6 +2,25 @@
 // use list clients createList Method to send the body
 
 
+new lc.http({
+
+    path: '/edit',
+    method: 'POST',
+    body: JSON.stringify({
+
+        mode: 'get_list_item',
+        listId: 'H1pqTf3bm',
+		itemId: 'SklipM2bX'
+
+    }),
+    onDone: function () {
+
+        console.log(this.response);
+
+    }
+
+});
+
 if (get('listid')) {
 
     /*
