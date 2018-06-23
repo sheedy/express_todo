@@ -49,8 +49,14 @@ editApp.use(require('body-parser').json());
 editApp.post('/edit',
 
     // check body
-    require('../lib/check_body.js'),
+    require('../lib/mw_check_body.js'),
 
+    // get list
+    require('../lib/mw_get_list.js'),
+
+    // add item?
+
+    // fail
     function (req, res) {
 
     res.json({

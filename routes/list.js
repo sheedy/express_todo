@@ -33,7 +33,7 @@ listApp.use(require('body-parser').json());
 listApp.post('/list',
     [
 
-        require('../lib/check_body.js'),
+        require('../lib/mw_check_body.js'),
 
         // create a list?
         function (req, res, next) {
