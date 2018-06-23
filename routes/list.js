@@ -80,7 +80,7 @@ listApp.post('/list',
                         success: true,
                         mess: 'well there is a middeware at least',
                         id: req.body.listId,
-                        list: list
+                        list: list.value()
 
                     });
 

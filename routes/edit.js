@@ -35,7 +35,7 @@ editApp.get('/edit', function (req, res) {
                 layout: 'edit',
                 listId: req.query.l || null,
                 lists: [],
-                list: list
+                list: list.value()
             });
 
         });
