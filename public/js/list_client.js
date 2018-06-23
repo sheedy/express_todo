@@ -130,12 +130,15 @@ var lc = (function () {
 
             obj.body = obj.body || {};
             obj.body.mode = 'add_list_item';
-            obj.body.item = obj.body.item || {name:'Pick nose, want watch youtube.'};
+            obj.body.item = obj.body.item || {
+                name: 'cry'
+            };
             obj.body = JSON.stringify(obj.body);
 
             new http({
 
                 method: 'POST',
+                path: '/edit',
                 body: obj.body,
                 onDone: obj.onDone,
                 onFail: obj.onFail
