@@ -29,9 +29,20 @@ if (get('listid')) {
                 body: {
                     listId: get('listid').innerText,
                     item: {
-                        
+
                         name: text
                     }
+
+                },
+                onDone: function () {
+
+                    var res = JSON.parse(this.response);
+
+                    var li = document.createElement('li');
+
+                    li.innerHTML = res.body.item.name;
+
+                    get('list_current').appendChild(li);
 
                 }
 

@@ -5,7 +5,7 @@
 
         <h3><span><%= list.name %></span> (List#: <span id="listid"><%= list.id %></span> ) </h3>
 
-        <ul>
+        <ul id="list_current">
            <% list.items.forEach(function(item){ %>
                 <li><%= item.name %></li>
            <% }); %>
