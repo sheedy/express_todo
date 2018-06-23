@@ -61,11 +61,11 @@ let readList = function () {
 // GET for /list path
 listApp.get('/list', function (req, res) {
 
+    // send just a list of names, and ids
     readList().then(function (list) {
 
         res.json({
-            mess: 'foo',
-            lists: list.get('lists').value()
+            lists: list.get('lists').value().map(function(l){ return {name:l.name,id:l.id}})
         });
 
     });
