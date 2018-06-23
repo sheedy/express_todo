@@ -33,18 +33,10 @@ require('./lib/conf.js')(app, __dirname).then(function () {
 
     });
 
-    /*
-    app.get('/edit', function (req, res) {
-
-    res.render('index', {
-    layout: 'edit',
-    listId: req.query.l || null
-    });
-
-    });
-     */
-
-    app.use('/edit', require('./routes/edit')());
+    //app.use('/edit', require('./routes/edit')());
+    app.use(require('./routes/edit')({
+            app: app
+        }));
 
     // start listening
     app.listen(app.get('port'), function () {

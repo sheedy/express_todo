@@ -1,14 +1,22 @@
 
+let express = require('express'),
+
+editApp = express();
+
+editApp.get('/edit', function(req, res) {
+
+    res.render('index', {
+        layout: 'edit',
+        listId: req.query.l || null
+    });
+
+});
 
 module.exports = function (obj) {
 
-    return function (req, res) {
+    // set views from main app
+    editApp.set('views',obj.app.get('views'));
 
-        res.render('index', {
-            layout: 'edit',
-            listId: req.query.l || null
-        });
-
-    }
+    return editApp;
 
 };
