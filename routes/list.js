@@ -45,8 +45,10 @@ let pushList = function (meta) {
 
     });
 
+
 };
 
+// GET for /list path
 listApp.get('/list', function (req, res) {
 
     res.json({
@@ -55,7 +57,7 @@ listApp.get('/list', function (req, res) {
 
 });
 
-// respond to posts
+// POST for /list path
 listApp.use(require('body-parser').json());
 listApp.post('/list',
     [
@@ -103,11 +105,20 @@ listApp.post('/list',
 
             if (req.body.mode === 'create') {
 
-                pushList();
+                pushList().then(function () {
 
-                res.json({
-                    success: true,
-                    mess: 'create a new list'
+                    res.json({
+                        success: true,
+                        mess: 'create a new list'
+                    });
+
+                }).catch (function () {
+
+                    res.json({
+                        success: false,
+                        mess: 'error with database!?'
+                    });
+
                 });
 
             } else {
