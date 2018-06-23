@@ -60,15 +60,17 @@ var lc = (function () {
     return {
 
         // just get the main index
-        getIndex: function (done, fail) {
+        getIndex: function (obj) {
 
-            done = done || nocb;
-            fail = fail || nocb;
+            obj = obj || {};
+
+            obj.onDone = obj.onDone || nocb;
+            obj.onFail = obj.onFail || nocb;
 
             new http({
 
-                onDone: done,
-                onFail: fail
+                onDone: obj.onDone,
+                onFail: obj.onFail
 
             });
 
