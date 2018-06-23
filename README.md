@@ -16,3 +16,15 @@ $ git clone https://github.com/dustinpfister/express_todo
 $ cd express_todo
 $ npm install
 ```
+
+### 1.2 - The conf.yaml file
+
+In this project I have experimented with using yaml as a way to define a config file. It seems like it is a better alternative then json for such a task, purely just for the reason that it supports comments.
+
+```yaml
+# The port to listen on
+port: 8080
+ 
+# The current theme to use
+theme: landscape
+```
