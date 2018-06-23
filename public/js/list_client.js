@@ -10,7 +10,7 @@ var lc = (function () {
         // defaults to making GET requests to the /list path
         this.method = obj.method || 'GET';
         this.path = obj.path || '/list';
-        this.payload = obj.payload || null;
+        this.body = obj.body || null;
         this.onDone = obj.onDone || function () {
             console.log(this.response);
         };
@@ -45,7 +45,7 @@ var lc = (function () {
         };
 
         // send
-        xhr.send(this.payload);
+        xhr.send(this.body);
 
     };
 
@@ -75,20 +75,20 @@ var lc = (function () {
         },
 
         // creates a new list
-        createList: function (done, fail) {
+        createList: function (obj) {
 
-            done = done || nocb;
-            fail = fail || nocb;
+            obj = obj || {};
+
+            obj.done = obj.done || nocb;
+            obj.fail = obj.fail || nocb;
+            obj.body = JSON.stringify(obj.body);
 
             new http({
 
                 method: 'POST',
-                payload: JSON.stringify({
-                    mode: 'create',
-                    name: 'foo'
-                }),
-                onDone: done,
-                onFail: fail
+                body: obj.body,
+                onDone: obj.done,
+                onFail: obj.fail
 
             });
 

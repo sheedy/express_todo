@@ -12,12 +12,16 @@ require('./lib/conf.js')(app, __dirname).then(function () {
     app.use('/theme/js', express.static(path.join(__dirname, 'themes', app.get('theme'), 'js')));
 
     // use /list path
-    app.use(require('./routes/list')({dir_root:__dirname}));
+    app.use(require('./routes/list')({
+            dir_root: __dirname
+        }));
 
     // main render
     app.get('/', function (req, res) {
 
-        res.render('index');
+        res.render('index', {
+            layout: 'index'
+        });
 
     });
 
