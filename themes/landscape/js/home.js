@@ -12,15 +12,14 @@ lc.getIndex({
 
             var li = document.createElement('li');
 
-            li.innerHTML = list.name;
+            li.innerHTML = '<a href="/edit?l='+list.id+'">'+list.name+'</a>';
 
             ul.appendChild(li);
 
         });
 
-		get('lists').innerHTML = '';
+        get('lists').innerHTML = '';
         get('lists').appendChild(ul);
-		
 
     }
 

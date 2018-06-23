@@ -76,6 +76,28 @@ var lc = (function () {
 
         },
 
+        // get a list by id
+        getList: function (obj) {
+
+            obj = obj || {};
+
+            obj.onDone = obj.onDone || nocb;
+            obj.onFail = obj.onFail || nocb;
+            obj.listId = obj.listId || null;
+
+            new http({
+                method: 'POST',
+                body: JSON.stringify({
+                    mode: 'getlist',
+                    listId: obj.listId
+                }),
+                onDone: obj.onDone,
+                onFail: obj.onFail
+
+            });
+
+        },
+
         // creates a new list
         createList: function (obj) {
 
