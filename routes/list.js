@@ -63,10 +63,6 @@ let getListById = function (id) {
 
     return readList().then(function (list) {
 
-        console.log(list.get('lists').find({
-                id: id
-            }).value());
-
         return list.get('lists').find({
             id: id
         }).value();
