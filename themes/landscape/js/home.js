@@ -1,3 +1,27 @@
 console.log('this is home');
 
-lc.getIndex();
+lc.getIndex({
+
+    onDone: function () {
+
+        var res = JSON.parse(this.response);
+
+        var ul = document.createElement('ul');
+
+        res.lists.forEach(function (list) {
+
+            var li = document.createElement('li');
+
+            li.innerHTML = list.name;
+
+            ul.appendChild(li);
+
+        });
+
+		get('lists').innerHTML = '';
+        get('lists').appendChild(ul);
+		
+
+    }
+
+});
