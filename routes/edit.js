@@ -28,10 +28,15 @@ editApp.get('/edit', function (req, res) {
 
     } else {
 
-        res.render('index', {
-            layout: 'edit',
-            listId: req.query.l || null,
-            lists: []
+        dbLists.getListById(req.query.l).then(function (list) {
+
+            res.render('index', {
+                layout: 'edit',
+                listId: req.query.l || null,
+                lists: [],
+				list : list
+            });
+
         });
 
     }
