@@ -3,10 +3,13 @@ path = require('path'),
 fs = require('fs-extra'),
 FileAsync = require('lowdb/adapters/FileAsync'),
 low = require('lowdb'),
-shortId = require('shortid');
+shortId = require('shortid'),
 
-let listApp = express();
+dbLists = require('../lib/db_lists'),
 
+listApp = express();
+
+/*
 // ensure db folder, and default list.json
 let ensureDB = function () {
 
@@ -71,11 +74,13 @@ let getListById = function (id) {
 
 };
 
+*/
+
 // GET for /list path
 listApp.get('/list', function (req, res) {
 
     // send just a list of names, and ids
-    readList().then(function (list) {
+    dbLists.readList().then(function (list) {
 
         res.json({
             lists: list.get('lists').value().map(function (l) {
@@ -139,7 +144,7 @@ listApp.post('/list',
 
             if (req.body.mode === 'create') {
 
-                pushList({
+                dbLists.pushList({
 
                     name: req.body.name || 'a new list'
 
@@ -172,7 +177,7 @@ listApp.post('/list',
 
             if (req.body.mode === 'getlist') {
 
-                getListById(req.body.listId).then(function (list) {
+                dbLists.getListById(req.body.listId).then(function (list) {
 
                     res.json({
 
@@ -248,7 +253,7 @@ module.exports = function (obj) {
     listApp.set('path_lists', path.join(listApp.get('dir_root'), 'db', 'lists.json'));
 
     // ensure db folder
-    ensureDB();
+    dbLists.ensureDB();
 
     return listApp;
 
