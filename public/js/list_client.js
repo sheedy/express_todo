@@ -79,16 +79,16 @@ var lc = (function () {
 
             obj = obj || {};
 
-            obj.done = obj.done || nocb;
-            obj.fail = obj.fail || nocb;
+            obj.onDone = obj.onDone || nocb;
+            obj.onFail = obj.onFail || nocb;
             obj.body = JSON.stringify(obj.body);
 
             new http({
 
                 method: 'POST',
                 body: obj.body,
-                onDone: obj.done,
-                onFail: obj.fail
+                onDone: obj.onDone,
+                onFail: obj.onFail
 
             });
 
