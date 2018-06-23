@@ -157,6 +157,26 @@ listApp.post('/list',
         // add an item?
         function (req, res, next) {
 
+            if (req.body.mode === 'getlist') {
+
+                res.json({
+
+                    success: true,
+                    mess: 'well there is a middeware at least'
+
+                });
+
+            } else {
+
+                next();
+
+            }
+
+        },
+
+        // add an item?
+        function (req, res, next) {
+
             if (req.body.mode === 'additem') {
 
                 if (req.body.listId) {
