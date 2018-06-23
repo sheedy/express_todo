@@ -55,13 +55,14 @@ editApp.post('/edit',
     require('../lib/mw_get_list.js'),
 
     // add item?
+    require('../lib/mw_add_list_item.js'),
 
     // fail
     function (req, res) {
 
     res.json({
 
-        success: true,
+        success: false,
         mess: 'post recived, but nothing happended',
         body: res.body
 
