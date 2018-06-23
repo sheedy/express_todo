@@ -65,7 +65,12 @@ listApp.get('/list', function (req, res) {
     readList().then(function (list) {
 
         res.json({
-            lists: list.get('lists').value().map(function(l){ return {name:l.name,id:l.id}})
+            lists: list.get('lists').value().map(function (l) {
+                return {
+                    name: l.name,
+                    id: l.id
+                }
+            })
         });
 
     });
@@ -140,6 +145,39 @@ listApp.post('/list',
                     });
 
                 });
+
+            } else {
+
+                next();
+
+            }
+
+        },
+
+        // add an item?
+        function (req, res, next) {
+
+            if (req.body.mode === 'additem') {
+
+                if (req.body.listId) {
+
+                    res.json({
+
+                        success: true,
+                        mess: ''
+
+                    });
+
+                } else {
+
+                    res.json({
+
+                        success: false,
+                        mess: 'no listId given'
+
+                    });
+
+                }
 
             } else {
 
