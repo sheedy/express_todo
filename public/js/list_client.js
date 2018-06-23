@@ -85,7 +85,7 @@ var lc = (function () {
                 method: 'POST',
                 payload: JSON.stringify({
                     mode: 'create',
-                    listname: 'foo'
+                    name: 'foo'
                 }),
                 onDone: done,
                 onFail: fail

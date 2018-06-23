@@ -45,7 +45,6 @@ let pushList = function (meta) {
 
     });
 
-
 };
 
 // GET for /list path
@@ -105,7 +104,11 @@ listApp.post('/list',
 
             if (req.body.mode === 'create') {
 
-                pushList().then(function () {
+                pushList({
+
+                    name: req.body.name || 'a new list'
+
+                }).then(function () {
 
                     res.json({
                         success: true,
