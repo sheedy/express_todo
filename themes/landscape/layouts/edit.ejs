@@ -1,5 +1,19 @@
 
     <h2>EDIT:</h2>
 
-    <p>post id: <span id="listid"><%= listId %></span></p>
+    <% if(listId){ %>
+
+        <p>post id: <span id="listid"><%= listId %></span></p>
+
+    <% }else{ %>
+
+       <h3>No List Id: index of lists given</h3>
+       <ul>
+           <% lists.forEach(function(list){ %>
+                <li><%= list.name %></li>
+           <% }); %>
+       </ul>
+
+    <% } %>
+
     <script src="/theme/js/edit.js"></script>
