@@ -49,11 +49,25 @@ let pushList = function (meta) {
 
 };
 
+// read the list
+let readList = function () {
+
+    let listAdapter = new FileAsync(listApp.get('path_lists'));
+
+    return low(listAdapter);
+
+};
+
 // GET for /list path
 listApp.get('/list', function (req, res) {
 
-    res.json({
-        mess: 'foo'
+    readList().then(function (list) {
+
+        res.json({
+            mess: 'foo',
+            lists: list.get('lists').value()
+        });
+
     });
 
 });
