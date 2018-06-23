@@ -1,7 +1,6 @@
 let express = require('express'),
 path = require('path'),
 fs = require('fs-extra'),
-//FileSync = require('lowdb/adapters/FileSync'),
 FileAsync = require('lowdb/adapters/FileAsync'),
 low = require('lowdb');
 
@@ -10,19 +9,11 @@ let listApp = express();
 // ensure db folder, and default list.json
 let ensureDB = function () {
 
+    let listAdapter = new FileAsync(listApp.get('path_lists'));
+
     return fs.ensureDir(path.join(listApp.get('dir_root'), 'db')).then(function () {
 
-        /*
-        var list = listApp.locals.list = low(new FileSync(listApp.get('path_lists')));
-
-        list.defaults({
-        lists: []
-        }).write();
-         */
-
-        let adapter = new FileAsync(listApp.get('path_lists'));
-
-        return low(adapter).then(function (list) {
+        return low(listAdapter).then(function (list) {
 
             return list.defaults({
                 lists: []
@@ -37,24 +28,13 @@ let ensureDB = function () {
 // push new list
 let pushList = function (meta) {
 
-    let list = listApp.locals.list;
+    let listAdapter = new FileAsync(listApp.get('path_lists'));
 
     meta = meta || {
         name: 'new list'
     };
 
-    /*
-    list.get('lists').push({
-
-    name: 'new list',
-    items: []
-
-    }).write();
-     */
-
-    let adapter = new FileAsync(listApp.get('path_lists'));
-
-    return low(adapter).then(function (list) {
+    return low(listAdapter).then(function (list) {
 
         return list.get('lists').push({
 
