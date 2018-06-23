@@ -58,6 +58,23 @@ let readList = function () {
 
 };
 
+// getListById
+let getListById = function (id) {
+
+    return readList().then(function (list) {
+
+        console.log(list.get('lists').find({
+                id: id
+            }).value());
+
+        return list.get('lists').find({
+            id: id
+        }).value();
+
+    });
+
+};
+
 // GET for /list path
 listApp.get('/list', function (req, res) {
 
@@ -154,15 +171,21 @@ listApp.post('/list',
 
         },
 
-        // add an item?
+        // get a list by id?
         function (req, res, next) {
 
             if (req.body.mode === 'getlist') {
 
-                res.json({
+                getListById(req.body.listId).then(function (list) {
 
-                    success: true,
-                    mess: 'well there is a middeware at least'
+                    res.json({
+
+                        success: true,
+                        mess: 'well there is a middeware at least',
+                        id: req.body.listId,
+                        list: list
+
+                    });
 
                 });
 
