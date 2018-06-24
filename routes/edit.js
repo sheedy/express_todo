@@ -57,6 +57,9 @@ editApp.post('/edit',
     // add item?
     require('../lib/mw_add_list_item.js'),
 
+    // delete item?
+    require('../lib/mw_delete_list_item.js'),
+
     // get item?
     require('../lib/mw_get_list_item.js'),
 

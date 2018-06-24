@@ -31,7 +31,7 @@ if (get('listid')) {
                 method: 'POST',
                 body: JSON.stringify({
 
-                    mode: 'get_list_item',
+                    mode: 'delete_list_item',
                     listId: listId,
                     itemId: itemId
 
