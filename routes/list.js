@@ -98,7 +98,8 @@ listApp.post('/list',
 
             }
 
-        }),
+        },
+
 
         // fail
         function (req, res) {

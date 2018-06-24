@@ -34,7 +34,7 @@
        <h3>No List Id: index of lists given</h3>
        <ul>
            <% lists.forEach(function(list){ %>
-                <li><a href="/edit?l=<%= list.id %>"><%= list.name %></a></li>
+                <li><a href="/edit?l=<%= list.id %>"><%= list.name %></a> | <%= list.id %></li>
            <% }); %>
        </ul>
 
