@@ -68,65 +68,6 @@ listApp.post('/list',
 
         },
 
-        // get a list by id?
-        function (req, res, next) {
-
-            if (req.body.mode === 'getlist') {
-
-                dbLists.getListById(req.body.listId).then(function (list) {
-
-                    res.json({
-
-                        success: true,
-                        mess: 'well there is a middeware at least',
-                        id: req.body.listId,
-                        list: list.value()
-
-                    });
-
-                });
-
-            } else {
-
-                next();
-
-            }
-
-        },
-
-        // add an item?
-        function (req, res, next) {
-
-            if (req.body.mode === 'additem') {
-
-                if (req.body.listId) {
-
-                    res.json({
-
-                        success: true,
-                        mess: ''
-
-                    });
-
-                } else {
-
-                    res.json({
-
-                        success: false,
-                        mess: 'no listId given'
-
-                    });
-
-                }
-
-            } else {
-
-                next();
-
-            }
-
-        },
-
         // fail
         function (req, res) {
 
