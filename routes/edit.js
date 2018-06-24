@@ -36,6 +36,7 @@ editApp.get('/edit', function (req, res) {
                 res.render('index', {
                     layout: 'edit',
                     listId: req.query.l || null,
+                    itemId: null,
                     lists: [],
                     list: list.value()
                 });
@@ -54,6 +55,7 @@ editApp.get('/edit', function (req, res) {
                 res.render('index', {
                     layout: 'edit',
                     listId: req.query.l || null,
+                    itemId: req.query.i || null,
                     lists: [],
                     item: item.value()
                 });

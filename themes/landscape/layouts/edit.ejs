@@ -3,6 +3,13 @@
 
     <% if(listId){ %>
 
+	
+	    <% if(itemId){ %>
+		
+		        <h3>Item Edit: </h3>
+		
+		<% }else{ %>
+	
         <h3><span><%= list.name %></span> (List#: <span id="listid"><%= list.id %></span> ) </h3>
 
         <ul id="list_current">
@@ -18,6 +25,8 @@
 
         <input id="newitem_text" type="text" value="foo">
         <input id="newitem_submit" type="submit" value="add item">
+		
+		<% } %>
 
     <% }else{ %>
 
