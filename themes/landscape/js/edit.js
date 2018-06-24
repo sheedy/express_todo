@@ -1,55 +1,64 @@
+// edit path client for 'landscape' theme
 
-// use list clients createList Method to send the body
+var onItemClick = function () {
 
+    console.log('li element clicked');
+
+};
+
+var onDoneClick = function () {
+
+    console.log('Done button clicked');
+
+};
+
+var onDeleteClick = function (e) {
+
+    console.log('delete button clicked');
+
+    var itemId = e.target.dataset.itemId,
+    listId = get('listid').innerHTML;
+
+    new lc.http({
+
+        path: '/edit',
+        method: 'POST',
+        body: JSON.stringify({
+
+            mode: 'delete_list_item',
+            listId: listId,
+            itemId: itemId
+
+        }),
+        onDone: function () {
+
+            var res = JSON.parse(this.response);
+
+            if (res.success) {
+
+                get('item_' + itemId).remove();
+
+            }
+
+        }
+
+    });
+
+}
 
 if (get('listid')) {
 
+    // for each hard coded list item
     [].forEach.call(document.querySelectorAll('.button_done'), function (el) {
 
-        console.log(el);
-
-        el.addEventListener('click', function () {
-
-            console.log('li clicked');
-
-        });
+        el.addEventListener('click', onDoneClick);
 
     });
 
     // for each delete button
     [].forEach.call(document.querySelectorAll('.button_delete'), function (el) {
 
-        el.addEventListener('click', function (e) {
-
-            var itemId = e.target.dataset.itemId,
-            listId = get('listid').innerHTML;
-
-            new lc.http({
-
-                path: '/edit',
-                method: 'POST',
-                body: JSON.stringify({
-
-                    mode: 'delete_list_item',
-                    listId: listId,
-                    itemId: itemId
-
-                }),
-                onDone: function () {
-
-                    var res = JSON.parse(this.response);
-
-                    if (res.success) {
-
-                        get('item_' + itemId).remove();
-
-                    }
-
-                }
-
-            });
-
-        });
+        el.addEventListener('click', onDeleteClick);
 
     });
 
