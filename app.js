@@ -10,6 +10,7 @@ require('./lib/conf.js')(app, __dirname).then(function () {
 
     // static paths for current theme
     app.use('/theme/js', express.static(path.join(__dirname, 'themes', app.get('theme'), 'js')));
+    app.use('/theme/css', express.static(path.join(__dirname, 'themes', app.get('theme'), 'css')));
 
     // use /list path
     app.use(require('./routes/list')({

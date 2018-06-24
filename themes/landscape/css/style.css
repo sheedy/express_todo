@@ -1,0 +1,11 @@
+.item_done{
+
+  text-decoration: line-through
+
+}
+
+.item_not_done{
+
+  text-decoration: none
+
+}

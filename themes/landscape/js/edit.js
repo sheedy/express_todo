@@ -24,7 +24,12 @@ var onDoneClick = function (e) {
 
             mode: 'edit_list_item',
             listId: listId,
-            itemId: itemId
+            itemId: itemId,
+            item: {
+
+                done: true
+
+            }
 
         }),
         onDone: function () {
