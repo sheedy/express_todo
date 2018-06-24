@@ -26,7 +26,7 @@ var onDoneClick = function (e) {
             listId: listId,
             itemId: itemId,
 
-            doneToggle: true
+            toggleDone: true
 
             /*
             item: {
