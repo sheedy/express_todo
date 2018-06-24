@@ -15,7 +15,7 @@
 
             <% list.items.forEach(function(item){ %>
                 <li id="item_<%= item.id %>" class="<%= item.done ? 'item_done': 'item_not_done'; %>" >
-                    <%= item.name %> | 
+                    <a href="/edit?l=<%= listId %>&i=<%= item.id %>"><%= item.name %></a> | 
                     <%= item.id %> | 
                     <input class="button_done" data-item-id="<%= item.id %>" type="button" value="done">
                     <input class="button_delete" data-item-id="<%= item.id %>" type="button" value="delete">
