@@ -5,17 +5,27 @@ dbLists = require('../lib/db_lists'),
 editApp = express();
 
 // GET
-editApp.get('/edit', function (req, res) {
+editApp.get('/edit',
+
+    // set up a render object
+    require('../lib/mw_render_obj'),
+
+    function (req, res) {
 
     if (req.query.l === undefined) {
 
         dbLists.readList().then(function (list) {
 
+            /*
             res.render('index', {
-                layout: 'edit',
-                listId: null,
-                lists: list.get('lists').value()
+            layout: 'edit',
+            listId: null,
+            lists: list.get('lists').value()
             });
+             */
+
+            req.rend.lists = list.get('lists').value();
+            res.render(req.rend.ejs_main, req.rend);
 
         }).catch (function () {
 
