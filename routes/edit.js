@@ -12,48 +12,41 @@ editApp.get('/edit',
 
     function (req, res) {
 
+    // use edit layout
+    req.rend.layout = 'edit';
+
     if (req.query.l === undefined) {
 
         dbLists.readList().then(function (list) {
 
-            /*
-            res.render('index', {
-            layout: 'edit',
-            listId: null,
-            lists: list.get('lists').value()
-            });
-             */
-
             req.rend.lists = list.get('lists').value();
-            res.render(req.rend.ejs_main, req.rend);
+            res.render(req.rend.main, req.rend);
 
         }).catch (function () {
 
-            res.render('index', {
-                layout: 'edit',
-                listId: null,
-                lists: []
-            });
+            res.render(req.rend.main, req.rend);
 
         });
 
     } else {
 
+        // set list Id
+        req.rend.listId = req.query.l;
+
+        // no item id given?
         if (req.query.i === undefined) {
 
             dbLists.getListById(req.query.l).then(function (list) {
 
-                res.render('index', {
-                    layout: 'edit',
-                    listId: req.query.l || null,
-                    itemId: null,
-                    lists: [],
-                    list: list.value()
-                });
+                req.rend.list = list.value();
+                res.render(req.rend.main, req.rend);
 
             });
 
         } else {
+
+            // item id given
+            req.rend.itemId = req.query.i;
 
             dbLists.getItemById({
 
