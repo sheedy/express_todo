@@ -68,6 +68,38 @@ listApp.post('/list',
 
         },
 
+        // delete a list?
+        function (req, res, next) {
+
+            if (req.body.mode === 'delete' && req.body.listId) {
+
+                dbLists.deleteListById(req.body).then(function () {
+
+                    res.json({
+                        success: true,
+                        mess: 'list deleted',
+                        body: req.body
+                    });
+
+                }).catch (function (e) {
+
+                    res.json({
+                        success: false,
+                        mess: 'error deleteding list',
+                        eMess: e.message,
+                        body: req.body
+                    });
+
+                });
+
+            } else {
+
+                next();
+
+            }
+
+        }),
+
         // fail
         function (req, res) {
 
