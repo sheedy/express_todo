@@ -2,25 +2,6 @@
 // use list clients createList Method to send the body
 
 
-new lc.http({
-
-    path: '/edit',
-    method: 'POST',
-    body: JSON.stringify({
-
-        mode: 'get_list_item',
-        listId: 'H1pqTf3bm',
-        itemId: 'SklipM2bX'
-
-    }),
-    onDone: function () {
-
-        console.log(this.response);
-
-    }
-
-});
-
 if (get('listid')) {
 
     /*
@@ -37,12 +18,35 @@ if (get('listid')) {
     });
      */
 
-    [].forEach.call(document.querySelectorAll('.button_delete'), function(el){
-		
-		console.log(el.dataset.itemId)
-		
-	});
+    [].forEach.call(document.querySelectorAll('.button_delete'), function (el) {
 
+        el.addEventListener('click', function (e) {
+
+            var itemId = e.target.dataset.itemId,
+            listId = get('listid').innerHTML;
+
+            new lc.http({
+
+                path: '/edit',
+                method: 'POST',
+                body: JSON.stringify({
+
+                    mode: 'get_list_item',
+                    listId: listId,
+                    itemId: itemId
+
+                }),
+                onDone: function () {
+
+                    console.log(this.response);
+
+                }
+
+            });
+
+        });
+
+    });
 
     get('newitem_submit').addEventListener('click', function () {
 
