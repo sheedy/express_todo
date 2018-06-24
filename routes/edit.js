@@ -29,16 +29,38 @@ editApp.get('/edit', function (req, res) {
 
     } else {
 
-        dbLists.getListById(req.query.l).then(function (list) {
+        if (req.query.i === undefined) {
 
-            res.render('index', {
-                layout: 'edit',
-                listId: req.query.l || null,
-                lists: [],
-                list: list.value()
+            dbLists.getListById(req.query.l).then(function (list) {
+
+                res.render('index', {
+                    layout: 'edit',
+                    listId: req.query.l || null,
+                    lists: [],
+                    list: list.value()
+                });
+
             });
 
-        });
+        } else {
+
+            dbLists.getItemById({
+
+                listId: req.query.l,
+                itemId: req.query.i
+
+            }).then(function (item) {
+
+                res.render('index', {
+                    layout: 'edit',
+                    listId: req.query.l || null,
+                    lists: [],
+                    item: item.value()
+                });
+
+            });
+
+        }
 
     }
 

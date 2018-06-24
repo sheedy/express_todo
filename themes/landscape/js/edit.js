@@ -102,6 +102,7 @@ if (get('listid')) {
 
     });
 
+    // if add item button is clicked
     get('newitem_submit').addEventListener('click', function () {
 
         var text = get('newitem_text').value;
