@@ -10,6 +10,7 @@ editApp.get('/edit',
         // set up a render object
         require('../lib/mw_render_obj'),
 
+        // make sure we are using the edit layout
         function (req, res, next) {
 
             // use edit layout
@@ -19,7 +20,8 @@ editApp.get('/edit',
 
         },
 
-        function (req, res) {
+        // render list of lists, if no listId is given in the query string
+        function (req, res, next) {
 
             if (req.query.l === undefined) {
 
@@ -36,37 +38,44 @@ editApp.get('/edit',
 
             } else {
 
-                // set list Id
-                req.rend.listId = req.query.l;
+                // else we where given a list id so...
+                next();
 
-                // no item id given?
-                if (req.query.i === undefined) {
+            }
 
-                    dbLists.getListById(req.query.l).then(function (list) {
+        },
 
-                        req.rend.list = list.value();
-                        res.render(req.rend.main, req.rend);
+        function (req, res) {
 
-                    });
+            // set list Id
+            req.rend.listId = req.query.l;
 
-                } else {
+            // no item id given?
+            if (req.query.i === undefined) {
 
-                    // item id given
-                    req.rend.itemId = req.query.i;
+                dbLists.getListById(req.query.l).then(function (list) {
 
-                    dbLists.getItemById({
+                    req.rend.list = list.value();
+                    res.render(req.rend.main, req.rend);
 
-                        listId: req.query.l,
-                        itemId: req.query.i
+                });
 
-                    }).then(function (item) {
+            } else {
 
-                        req.rend.item = item.value();
-                        res.render(req.rend.main, req.rend);
+                // item id given
+                req.rend.itemId = req.query.i;
 
-                    });
+                dbLists.getItemById({
 
-                }
+                    listId: req.query.l,
+                    itemId: req.query.i
+
+                }).then(function (item) {
+
+                    req.rend.item = item.value();
+                    res.render(req.rend.main, req.rend);
+
+                });
 
             }
 
