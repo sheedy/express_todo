@@ -28,14 +28,6 @@ var onDoneClick = function (e) {
 
             toggleDone: true
 
-            /*
-            item: {
-
-            done: true
-
-            }
-             */
-
         }),
         onDone: function () {
 
