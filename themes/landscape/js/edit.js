@@ -4,20 +4,14 @@
 
 if (get('listid')) {
 
-    /*
-    lc.getList({
+    [].forEach.call(get('list_current').children, function(el){
+		
+		console.log(el);
+		
+	});
 
-    listId: get('listid').innerText,
-    onDone: function () {
 
-    console.log('got list');
-    console.log(this.response);
-
-    }
-
-    });
-     */
-
+    // for each delete button
     [].forEach.call(document.querySelectorAll('.button_delete'), function (el) {
 
         el.addEventListener('click', function (e) {
