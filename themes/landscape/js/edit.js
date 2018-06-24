@@ -6,9 +6,15 @@ var onItemClick = function () {
 
 };
 
-var onDoneClick = function () {
+var onDoneClick = function (e) {
 
     console.log('Done button clicked');
+
+    var li = e.target.parentElement,
+    itemId = li.id.split('_')[1],
+    listId = get('listid').innerHTML;
+	
+	console.log(listId,itemId);
 
 };
 
