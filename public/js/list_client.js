@@ -91,7 +91,30 @@ var lc = (function () {
             new http({
                 method: 'POST',
                 body: JSON.stringify({
-                    mode: 'getlist',
+                    mode: 'get',
+                    listId: obj.listId
+                }),
+                onDone: obj.onDone,
+                onFail: obj.onFail
+
+            });
+
+        },
+
+        // delete a list
+        delList: function (obj) {
+
+            obj = obj || {};
+
+            obj.onDone = obj.onDone || nocb;
+            obj.onFail = obj.onFail || nocb;
+            obj.listId = obj.listId || null;
+
+            new lc.http({
+
+                method: 'POST',
+                body: JSON.stringify({
+                    mode: 'delete',
                     listId: obj.listId
                 }),
                 onDone: obj.onDone,
