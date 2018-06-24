@@ -38,7 +38,13 @@ if (get('listid')) {
                 }),
                 onDone: function () {
 
-                    console.log(this.response);
+                    var res = JSON.parse(this.response);
+
+                    if (res.success) {
+
+                        get('item_' + itemId).remove();
+
+                    }
 
                 }
 
