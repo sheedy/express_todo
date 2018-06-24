@@ -13,8 +13,9 @@ var onDoneClick = function (e) {
     console.log('Done button clicked');
 
     var li = e.target.parentElement,
-    itemId = li.id.split('_')[1],
+    itemId = li.id.replace(/^item_/,''),
     listId = get('listid').innerHTML;
+
 
     new lc.http({
 
@@ -35,12 +36,10 @@ var onDoneClick = function (e) {
 
             if (res.success) {
 
-                console.log('okay');
                 console.log(res);
 
             } else {
 
-                console.log('nope');
                 console.log(res);
 
             }
