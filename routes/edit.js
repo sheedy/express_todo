@@ -55,13 +55,8 @@ editApp.get('/edit',
 
             }).then(function (item) {
 
-                res.render('index', {
-                    layout: 'edit',
-                    listId: req.query.l || null,
-                    itemId: req.query.i || null,
-                    lists: [],
-                    item: item.value()
-                });
+                req.rend.item = item.value();
+                res.render(req.rend.main, req.rend);
 
             });
 
