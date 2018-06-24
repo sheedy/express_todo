@@ -60,6 +60,9 @@ editApp.post('/edit',
     // delete item?
     require('../lib/mw_delete_list_item.js'),
 
+    // edit item?
+    require('../lib/mw_delete_list_item.js'),
+
     // get item?
     require('../lib/mw_get_list_item.js'),
 
