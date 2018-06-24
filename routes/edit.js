@@ -6,65 +6,73 @@ editApp = express();
 
 // GET
 editApp.get('/edit',
+    [
+        // set up a render object
+        require('../lib/mw_render_obj'),
 
-    // set up a render object
-    require('../lib/mw_render_obj'),
+        function (req, res, next) {
 
-    function (req, res) {
+            // use edit layout
+            req.rend.layout = 'edit';
 
-    // use edit layout
-    req.rend.layout = 'edit';
+            next();
 
-    if (req.query.l === undefined) {
+        },
 
-        dbLists.readList().then(function (list) {
+        function (req, res) {
 
-            req.rend.lists = list.get('lists').value();
-            res.render(req.rend.main, req.rend);
+            if (req.query.l === undefined) {
 
-        }).catch (function () {
+                dbLists.readList().then(function (list) {
 
-            res.render(req.rend.main, req.rend);
+                    req.rend.lists = list.get('lists').value();
+                    res.render(req.rend.main, req.rend);
 
-        });
+                }).catch (function () {
 
-    } else {
+                    res.render(req.rend.main, req.rend);
 
-        // set list Id
-        req.rend.listId = req.query.l;
+                });
 
-        // no item id given?
-        if (req.query.i === undefined) {
+            } else {
 
-            dbLists.getListById(req.query.l).then(function (list) {
+                // set list Id
+                req.rend.listId = req.query.l;
 
-                req.rend.list = list.value();
-                res.render(req.rend.main, req.rend);
+                // no item id given?
+                if (req.query.i === undefined) {
 
-            });
+                    dbLists.getListById(req.query.l).then(function (list) {
 
-        } else {
+                        req.rend.list = list.value();
+                        res.render(req.rend.main, req.rend);
 
-            // item id given
-            req.rend.itemId = req.query.i;
+                    });
 
-            dbLists.getItemById({
+                } else {
 
-                listId: req.query.l,
-                itemId: req.query.i
+                    // item id given
+                    req.rend.itemId = req.query.i;
 
-            }).then(function (item) {
+                    dbLists.getItemById({
 
-                req.rend.item = item.value();
-                res.render(req.rend.main, req.rend);
+                        listId: req.query.l,
+                        itemId: req.query.i
 
-            });
+                    }).then(function (item) {
+
+                        req.rend.item = item.value();
+                        res.render(req.rend.main, req.rend);
+
+                    });
+
+                }
+
+            }
 
         }
 
-    }
-
-});
+    ]);
 
 // POST
 editApp.use(require('body-parser').json());
