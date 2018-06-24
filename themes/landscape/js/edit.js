@@ -1,11 +1,13 @@
 // edit path client for 'landscape' theme
 
+// when a list item is clicked
 var onItemClick = function () {
 
     console.log('li element clicked');
 
 };
 
+// when a done button is clicked
 var onDoneClick = function (e) {
 
     console.log('Done button clicked');
@@ -13,11 +15,41 @@ var onDoneClick = function (e) {
     var li = e.target.parentElement,
     itemId = li.id.split('_')[1],
     listId = get('listid').innerHTML;
-	
-	console.log(listId,itemId);
+
+    new lc.http({
+
+        path: '/edit',
+        method: 'POST',
+        body: JSON.stringify({
+
+            mode: 'edit_list_item',
+            listId: listId,
+            itemId: itemId
+
+        }),
+        onDone: function () {
+
+            var res = JSON.parse(this.response);
+
+            if (res.success) {
+
+                console.log('okay');
+                console.log(res);
+
+            } else {
+
+                console.log('nope');
+                console.log(res);
+
+            }
+
+        }
+
+    });
 
 };
 
+// when the delete button is clieck
 var onDeleteClick = function (e) {
 
     console.log('delete button clicked');
