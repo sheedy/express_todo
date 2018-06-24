@@ -38,17 +38,16 @@ editApp.get('/edit',
 
             } else {
 
-                // else we where given a list id so...
+                // else we where given a list id so set the list id, and continue.
+                req.rend.listId = req.query.l;
                 next();
 
             }
 
         },
 
-        function (req, res) {
-
-            // set list Id
-            req.rend.listId = req.query.l;
+        // if no item id is given, just send out the list
+        function (req, res, next) {
 
             // no item id given?
             if (req.query.i === undefined) {
@@ -64,20 +63,26 @@ editApp.get('/edit',
 
                 // item id given
                 req.rend.itemId = req.query.i;
-
-                dbLists.getItemById({
-
-                    listId: req.query.l,
-                    itemId: req.query.i
-
-                }).then(function (item) {
-
-                    req.rend.item = item.value();
-                    res.render(req.rend.main, req.rend);
-
-                });
+                next();
 
             }
+
+        },
+
+        // get the item
+        function (req, res) {
+
+            dbLists.getItemById({
+
+                listId: req.query.l,
+                itemId: req.query.i
+
+            }).then(function (item) {
+
+                req.rend.item = item.value();
+                res.render(req.rend.main, req.rend);
+
+            });
 
         }
 
