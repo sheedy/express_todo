@@ -4,12 +4,17 @@
 
 if (get('listid')) {
 
-    [].forEach.call(get('list_current').children, function(el){
-		
-		console.log(el);
-		
-	});
+    [].forEach.call(document.querySelectorAll('.button_done'), function (el) {
 
+        console.log(el);
+
+        el.addEventListener('click', function () {
+
+            console.log('li clicked');
+
+        });
+
+    });
 
     // for each delete button
     [].forEach.call(document.querySelectorAll('.button_delete'), function (el) {
