@@ -14,7 +14,7 @@ editApp.post('/edit',
     require('../lib/mw_check_body.js'),
 
     // get list
-    require('../lib/mw_get_list.js'),
+    //require('../lib/mw_get_list.js'),
 
     // add item?
     require('../lib/mw_add_list_item.js'),

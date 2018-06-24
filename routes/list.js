@@ -100,6 +100,39 @@ listApp.post('/list',
 
         },
 
+        // get a list?
+        function (req, res, next) {
+
+            if (req.body.mode === 'get' && req.body.listId) {
+
+                dbLists.getListById(req.body.listId).then(function (list) {
+
+                    res.json({
+                        success: true,
+                        mess: 'got the list',
+                        list: list,
+                        body: req.body
+                    });
+
+                }).catch (function (e) {
+
+                    res.json({
+                        success: false,
+                        mess: 'error getting list',
+                        eMess: e.message,
+                        list: null,
+                        body: req.body
+                    });
+
+                });
+
+            } else {
+
+                next()
+
+            }
+
+        },
 
         // fail
         function (req, res) {
