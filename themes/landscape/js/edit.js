@@ -25,11 +25,16 @@ var onDoneClick = function (e) {
             mode: 'edit_list_item',
             listId: listId,
             itemId: itemId,
+
+            doneToggle: true
+
+            /*
             item: {
 
-                done: true
+            done: true
 
             }
+             */
 
         }),
         onDone: function () {
