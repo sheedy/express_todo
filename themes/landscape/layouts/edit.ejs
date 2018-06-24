@@ -7,11 +7,11 @@
 
         <ul id="list_current">
            <% list.items.forEach(function(item){ %>
-                <li><%= item.name %></li>
+                <li><%= item.name %> | <%= item.id %> | <input class="button_delete" data-item-id="<%= item.id %>" type="button" value="delete"> </li>
            <% }); %>
        </ul>
 
-        <input id="newitem_text" type="text" value="pick nose">
+        <input id="newitem_text" type="text" value="foo">
         <input id="newitem_submit" type="submit" value="add item">
 
     <% }else{ %>

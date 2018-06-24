@@ -10,7 +10,7 @@ new lc.http({
 
         mode: 'get_list_item',
         listId: 'H1pqTf3bm',
-		itemId: 'SklipM2bX'
+        itemId: 'SklipM2bX'
 
     }),
     onDone: function () {
@@ -36,6 +36,13 @@ if (get('listid')) {
 
     });
      */
+
+    [].forEach.call(document.querySelectorAll('.button_delete'), function(el){
+		
+		console.log(el.dataset.itemId)
+		
+	});
+
 
     get('newitem_submit').addEventListener('click', function () {
 
