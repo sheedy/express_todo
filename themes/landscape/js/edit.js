@@ -147,8 +147,25 @@ if (get('listid')) {
 
     [].forEach.call(document.querySelectorAll('.list_delete'), function (el) {
 
-	    console.log(el.parentElement);
-	
+        el.addEventListener('click', function (e) {
+
+            var li = e.target.parentElement,
+            listId = li.id.replace(/^list_/, '');
+
+            console.log(listId);
+
+            lc.delList({
+
+                listId: listId,
+                onDone: function () {
+
+                    console.log(this.response);
+
+                }
+
+            });
+
+        });
 
     });
 
