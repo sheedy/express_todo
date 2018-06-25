@@ -4,17 +4,16 @@ dbLists = require('../lib/db_lists'),
 
 editApp = express();
 
-editApp.get('/edit', require('../lib/mw_edit_get'));
+//editApp.get('/edit', require('../lib/mw_edit_get'));
+
+editApp.get('/edit', require('./mw/edit_get'));
 
 // POST
 editApp.use(require('body-parser').json());
 editApp.post('/edit',
 
     // check body
-    require('../lib/mw_check_body.js'),
-
-    // get list
-    //require('../lib/mw_get_list.js'),
+    require('./mw/check_body'),
 
     // add item?
     require('../lib/mw_add_list_item.js'),
