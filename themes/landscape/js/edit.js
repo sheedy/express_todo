@@ -1,5 +1,19 @@
 // edit path client for 'landscape' theme
 
+var reload = function (noListId) {
+
+    var param = '';
+
+    if (!noListId) {
+
+        param = '?l=' + get('listid').innerHTML;
+
+    }
+
+    window.location.href = '/edit' + param;
+
+};
+
 // when a list item is clicked
 var onItemClick = function () {
 
@@ -63,12 +77,6 @@ var onDeleteClick = function (e, done) {
 }
 
 if (get('listid')) {
-
-    var reload = function () {
-
-        window.location.href = '/edit?l=' + get('listid').innerHTML;
-
-    };
 
     // for each hard coded list item
     [].forEach.call(document.querySelectorAll('.button_done'), function (el) {
@@ -153,7 +161,8 @@ if (get('listid')) {
                 listId: listId,
                 onDone: function () {
 
-                    console.log(this.response);
+                    //console.log(this.response);
+					reload(true);
 
                 }
 
