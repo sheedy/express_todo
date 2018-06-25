@@ -2,8 +2,9 @@
 let dbLists = require('../../lib/db_lists');
 
 module.exports = [
+
     // set up a standard render object
-    require('./render_obj'),
+    require('./setobj_rend'),
 
     // make sure we are using the edit layout
     function (req, res, next) {

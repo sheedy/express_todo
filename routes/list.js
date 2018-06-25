@@ -13,7 +13,7 @@ listApp = express();
 listApp.get('/list', function (req, res) {
 
     // send just a list of names, and ids
-    dbLists.readList().then(function (list) {
+    dbLists.readLists().then(function (list) {
 
         res.json({
             lists: list.get('lists').value().map(function (l) {
