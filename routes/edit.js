@@ -16,16 +16,16 @@ editApp.post('/edit',
     require('./mw/check_body'),
 
     // add item?
-    require('../lib/mw_add_list_item.js'),
+    require('./mw/add_list_item'),
 
     // delete item?
-    require('../lib/mw_delete_list_item.js'),
+    require('./mw/delete_list_item'),
 
     // edit item?
-    require('../lib/mw_edit_list_item.js'),
+    require('./mw/edit_list_item'),
 
     // get item?
-    require('../lib/mw_get_list_item.js'),
+    require('./mw/get_list_item'),
 
     // fail
     function (req, res) {

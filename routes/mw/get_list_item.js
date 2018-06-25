@@ -1,20 +1,19 @@
-let dbLists = require('./db_lists');
+let dbLists = require('../../lib/db_lists');
 
 // check body
 module.exports = function (req, res, next) {
 
-    if (req.body.mode === 'delete_list_item') {
+    if (req.body.mode === 'get_list_item') {
 
         if (req.body.listId && req.body.itemId) {
 
-            dbLists.deleteItemById(req.body).then(function (item) {
+            dbLists.getItemById(req.body).then(function (item) {
 
                 res.json({
-
                     success: true,
-                    mess: 'item deleted',
+                    mess: 'got the item',
+                    item: item.value(),
                     body: req.body
-
                 });
 
             }).catch (function (e) {
@@ -22,7 +21,7 @@ module.exports = function (req, res, next) {
                 res.json({
 
                     success: false,
-                    mess: 'error deleteing item',
+                    mess: 'error getting list',
                     eMess: e.message
 
                 });

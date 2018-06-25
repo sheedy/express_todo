@@ -1,4 +1,4 @@
-let dbLists = require('./db_lists');
+let dbLists = require('../../lib/db_lists');
 
 // edit list item middleware
 module.exports = function (req, res, next) {
