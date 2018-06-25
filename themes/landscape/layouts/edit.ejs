@@ -34,7 +34,11 @@
        <h3>No List Id: index of lists given</h3>
        <ul>
            <% lists.forEach(function(list){ %>
-                <li><a href="/edit?l=<%= list.id %>"><%= list.name %></a> | <%= list.id %></li>
+               <li>
+                   <a href="/edit?l=<%= list.id %>"><%= list.name %></a> | 
+                   <%= list.id %> | 
+                   <input class="list_delete" type="button" value="delete">
+               </li>
            <% }); %>
        </ul>
 
