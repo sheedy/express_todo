@@ -8,13 +8,15 @@ var onItemClick = function () {
 };
 
 // when a done button is clicked
-var onDoneClick = function (e) {
+var onDoneClick = function (e, done) {
 
     console.log('Done button clicked');
 
     var li = e.target.parentElement,
     itemId = li.id.replace(/^item_/, ''),
     listId = get('listid').innerHTML;
+
+    done = done || function () {};
 
     new lc.http({
 
@@ -29,33 +31,19 @@ var onDoneClick = function (e) {
             toggleDone: true
 
         }),
-        onDone: function () {
-
-            var res = JSON.parse(this.response);
-
-            if (res.success) {
-
-                console.log(res);
-
-            } else {
-
-                console.log(res);
-
-            }
-
-        }
+        onDone: done
 
     });
 
 };
 
 // when the delete button is clieck
-var onDeleteClick = function (e) {
-
-    console.log('delete button clicked');
+var onDeleteClick = function (e, done) {
 
     var itemId = e.target.dataset.itemId,
     listId = get('listid').innerHTML;
+
+    done = done || function () {};
 
     new lc.http({
 
@@ -68,17 +56,7 @@ var onDeleteClick = function (e) {
             itemId: itemId
 
         }),
-        onDone: function () {
-
-            var res = JSON.parse(this.response);
-
-            if (res.success) {
-
-                get('item_' + itemId).remove();
-
-            }
-
-        }
+        onDone: done
 
     });
 
@@ -86,17 +64,37 @@ var onDeleteClick = function (e) {
 
 if (get('listid')) {
 
+    var reload = function () {
+
+        window.location.href = '/edit?l=' + get('listid').innerHTML;
+
+    };
+
     // for each hard coded list item
     [].forEach.call(document.querySelectorAll('.button_done'), function (el) {
 
-        el.addEventListener('click', onDoneClick);
+        el.addEventListener('click', function (e) {
+
+            onDoneClick(e, function () {
+
+                reload();
+
+            });
+
+        });
 
     });
 
     // for each delete button
     [].forEach.call(document.querySelectorAll('.button_delete'), function (el) {
 
-        el.addEventListener('click', onDeleteClick);
+        el.addEventListener('click', function (e) {
+
+            onDeleteClick(e, function () {
+                reload();
+            });
+
+        });
 
     });
 
@@ -123,15 +121,7 @@ if (get('listid')) {
 
                     if (res.success) {
 
-                        /*
-                        var li = document.createElement('li');
-
-                        li.innerHTML = res.body.item.name;
-
-                        get('list_current').appendChild(li);
-                         */
-
-                        window.location.href = '/edit?l=' + get('listid').innerHTML;
+                        reload();
 
                     } else {
 
