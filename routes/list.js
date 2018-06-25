@@ -49,12 +49,7 @@ listApp.post('/list',
         require('./mw/list_get'),
 
         // fail
-        function (req, res) {
-
-            req.postRes.mess = 'post recived, but nothing was done. Check the given body';
-            res.json(req.postRes);
-
-        }
+        require('./mw/check_fail')
 
     ]);
 

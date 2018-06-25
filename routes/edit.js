@@ -15,6 +15,9 @@ editApp.post('/edit',
     // check body
     require('./mw/check_body'),
 
+    // set postRes object
+    require('./mw/setobj_postres'),
+
     // add item?
     require('./mw/item_add'),
 
@@ -27,28 +30,11 @@ editApp.post('/edit',
     // get item?
     require('./mw/item_get'),
 
-    // add item?
-    //require('./mw/add_list_item'),
-
-    // delete item?
-    //require('./mw/delete_list_item'),
-
-    // edit item?
-    //require('./mw/edit_list_item'),
-
-    // get item?
-    //require('./mw/get_list_item'),
-
     // fail
     function (req, res) {
 
-    res.json({
-
-        success: false,
-        mess: 'post recived, but nothing happended',
-        body: res.body
-
-    })
+    req.postRes.mess = 'well I got the post, but nothing happend. Check the body again.';
+    res.json(req.postRes);
 
 });
 
