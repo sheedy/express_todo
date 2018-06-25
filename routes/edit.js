@@ -12,31 +12,27 @@ editApp.get('/edit', require('./mw/edit_get'));
 editApp.use(require('body-parser').json());
 editApp.post('/edit',
 
-    // check body
-    require('./mw/check_body'),
+    [
+        // check body
+        require('./mw/check_body'),
 
-    // set postRes object
-    require('./mw/setobj_postres'),
+        // set postRes object
+        require('./mw/setobj_postres'),
 
-    // add item?
-    require('./mw/item_add'),
+        // add item?
+        require('./mw/item_add'),
 
-    // delete item?
-    require('./mw/item_delete'),
+        // delete item?
+        require('./mw/item_delete'),
 
-    // edit item?
-    require('./mw/item_edit'),
+        // edit item?
+        require('./mw/item_edit'),
 
-    // get item?
-    require('./mw/item_get'),
+        // get item?
+        require('./mw/item_get'),
 
-    // fail
-    function (req, res) {
-
-    req.postRes.mess = 'well I got the post, but nothing happend. Check the body again.';
-    res.json(req.postRes);
-
-});
+        // fail
+        require('./mw/check_fail')]);
 
 module.exports = function (obj) {
 
