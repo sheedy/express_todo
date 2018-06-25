@@ -16,16 +16,28 @@ editApp.post('/edit',
     require('./mw/check_body'),
 
     // add item?
-    require('./mw/add_list_item'),
+    require('./mw/item_add'),
 
     // delete item?
-    require('./mw/delete_list_item'),
+    require('./mw/item_delete'),
 
     // edit item?
-    require('./mw/edit_list_item'),
+    require('./mw/item_edit'),
 
     // get item?
-    require('./mw/get_list_item'),
+    require('./mw/item_get'),
+
+    // add item?
+    //require('./mw/add_list_item'),
+
+    // delete item?
+    //require('./mw/delete_list_item'),
+
+    // edit item?
+    //require('./mw/edit_list_item'),
+
+    // get item?
+    //require('./mw/get_list_item'),
 
     // fail
     function (req, res) {
