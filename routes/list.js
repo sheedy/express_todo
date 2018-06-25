@@ -44,11 +44,12 @@ listApp.post('/list',
 
                     name: req.body.name || 'a new list'
 
-                }).then(function () {
+                }).then(function (list) {
 
                     res.json({
                         success: true,
-                        mess: 'create a new list'
+                        mess: 'create a new list',
+						list: list
                     });
 
                 }).catch (function () {

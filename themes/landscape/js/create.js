@@ -22,8 +22,10 @@ get('create_submit').addEventListener('click', function (e) {
         body: body,
         onDone: function () {
 
+		    console.log(this.response);
+		
             // redirect to origin
-            window.location.href = window.location.origin;
+            //window.location.href = '/edit'//window.location.origin;
 
         }
 
