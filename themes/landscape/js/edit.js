@@ -123,11 +123,15 @@ if (get('listid')) {
 
                     if (res.success) {
 
+                        /*
                         var li = document.createElement('li');
 
                         li.innerHTML = res.body.item.name;
 
                         get('list_current').appendChild(li);
+                         */
+
+                        window.location.href = '/edit?l=' + get('listid').innerHTML;
 
                     } else {
 
