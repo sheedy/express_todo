@@ -13,9 +13,8 @@ var onDoneClick = function (e) {
     console.log('Done button clicked');
 
     var li = e.target.parentElement,
-    itemId = li.id.replace(/^item_/,''),
+    itemId = li.id.replace(/^item_/, ''),
     listId = get('listid').innerHTML;
-
 
     new lc.http({
 
@@ -141,6 +140,15 @@ if (get('listid')) {
             });
 
         }
+
+    });
+
+} else {
+
+    [].forEach.call(document.querySelectorAll('.list_delete'), function (el) {
+
+	    console.log(el.parentElement);
+	
 
     });
 
