@@ -43,59 +43,10 @@ listApp.post('/list',
         require('./mw/list_create'),
 
         // delete a list?
-        function (req, res, next) {
-
-            if (req.body.mode === 'delete' && req.body.listId) {
-
-                dbLists.deleteListById(req.body).then(function () {
-
-                    req.postRes.success = true;
-                    req.postRes.mess = 'list deleted';
-                    res.json(req.postRes);
-
-                }).catch (function (e) {
-
-                    req.postRes.mess = 'error deleteing list';
-                    req.postRes.eMess = e.message;
-                    res.json(req.postRes);
-
-                });
-
-            } else {
-
-                next();
-
-            }
-
-        },
+        require('./mw/list_delete'),
 
         // get a list?
-        function (req, res, next) {
-
-            if (req.body.mode === 'get' && req.body.listId) {
-
-                dbLists.getListById(req.body.listId).then(function (list) {
-
-                    req.postRes.success = true;
-                    req.postRes.mess = 'got the list.';
-                    req.postRes.list = list;
-                    res.json(req.postRes);
-
-                }).catch (function (e) {
-
-                    req.postRes.mess = 'error getting the list.';
-                    req.postRes.eMess = e.message;
-                    res.json(req.postRes);
-
-                });
-
-            } else {
-
-                next()
-
-            }
-
-        },
+        require('./mw/list_get'),
 
         // fail
         function (req, res) {
