@@ -162,7 +162,7 @@ if (get('listid')) {
                 onDone: function () {
 
                     //console.log(this.response);
-					reload(true);
+                    reload(true);
 
                 }
 

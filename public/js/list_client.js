@@ -1,4 +1,11 @@
 
+var get = function (id) {
+
+    return document.getElementById(id);
+
+};
+
+
 // list client.
 var lc = (function () {
 
