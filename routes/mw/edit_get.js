@@ -1,5 +1,6 @@
 // a middleware that starts a render object
-let dbLists = require('../../lib/db_lists');
+let dbLists = require('../../lib/db_lists'),
+_ = require('lodash');
 
 module.exports = [
 
@@ -21,10 +22,43 @@ module.exports = [
 
         if (req.query.l === undefined) {
 
+            req.rend.lists = [];
+
             dbLists.readLists().then(function (lists) {
 
-                req.rend.lists = lists.get('lists').value();
-                res.render(req.rend.main, req.rend);
+                lists.get('lists').each(function (list) {
+
+                    let countDone = 0;
+                    list.items.forEach(function (item) {
+
+                        if (item.done) {
+
+                            console.log(item);
+                            countDone += 1;
+
+                        }
+
+                    });
+
+                    let countRemain = list.items.length - countDone;
+
+                    // push object in lists array for rendering
+                    // merge the list object and additional stats
+                    // found on the fly
+                    req.rend.lists.push(_.merge({}, list, {
+
+                            countDone: countDone,
+                            countRemain: countRemain
+
+                        }));
+
+                    return list;
+
+                }).write().then(function (lists) {
+
+                    res.render(req.rend.main, req.rend);
+
+                });
 
             }).catch (function () {
 
