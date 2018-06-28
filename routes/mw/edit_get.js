@@ -33,7 +33,6 @@ module.exports = [
 
                         if (item.done) {
 
-                            console.log(item);
                             countDone += 1;
 
                         }
