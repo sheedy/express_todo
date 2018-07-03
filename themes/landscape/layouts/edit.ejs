@@ -32,6 +32,18 @@
     <% }else{ %>
 
        <h3>No List Id: index of lists given</h3>
+
+       <%
+
+          // sort by countRemain
+          lists = lists.sort(function(a,b){
+
+              return b.countRemain > a.countRemain ? 1 : -1;
+
+          });
+
+       %>
+
        <ul>
            <% lists.forEach(function(list){ %>
                <li id="list_<%= list.id %>">
